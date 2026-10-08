@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercícios de Desenvolvimento Web | Daniel Dantas</title>
+<style>
+:root{--azul:#174ea6;--fundo:#f4f6f9;--texto:#202938;--borda:#dce2ea}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--fundo);color:var(--texto);line-height:1.5}
+header{background:#fff;border-bottom:1px solid var(--borda);padding:36px 20px;text-align:center}header h1{margin:0 0 8px;color:var(--azul)}header p{margin:0;color:#5e6877}
+main{max-width:1100px;margin:28px auto;padding:0 18px}.intro{background:#fff;border:1px solid var(--borda);padding:20px;border-radius:12px;margin-bottom:22px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}nav a{color:var(--azul);background:#e8efff;padding:8px 12px;border-radius:8px;text-decoration:none;font-size:.92rem}
+section{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:22px;margin:18px 0;scroll-margin-top:16px}section h2{margin-top:0;color:var(--azul)}.tag{font-size:.78rem;background:#edf1f6;border-radius:5px;padding:4px 8px;color:#455164}
+button{background:var(--azul);color:#fff;border:0;border-radius:7px;padding:10px 14px;cursor:pointer;font-weight:600}button:hover{filter:brightness(.92)}button:disabled{opacity:.5;cursor:not-allowed}
+input,select,textarea{font:inherit;border:1px solid #c7cfda;border-radius:7px;padding:10px;max-width:100%}input,select,textarea{margin:5px 0}textarea{width:100%;min-height:105px;font-family:monospace}.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.result{padding:12px;background:#f4f6f9;border-radius:7px;margin-top:12px;white-space:pre-wrap}.ok{color:#18743a;font-weight:bold}.erro{color:#b42318;font-weight:bold}.task-list{padding-left:22px}.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.product{border:1px solid var(--borda);padding:14px;border-radius:8px}.price{color:#18743a;font-weight:bold}.preview{text-align:center;background:#f7f8fa;padding:14px;border-radius:8px;margin:12px 0}.preview img{width:100px;height:100px;object-fit:contain;border-radius:50%}.json{background:#20242c;color:#f3f4f6;padding:14px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+footer{text-align:center;color:#667085;padding:26px 15px;font-size:.9rem}
+@media(max-width:600px){header{padding:26px 15px}section{padding:16px}.row>*{width:100%}button{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>Exercícios de Desenvolvimento Web</h1><p>Atividades práticas de HTML, CSS, JavaScript e JSON</p></header>
+<main>
+<div class="intro"><strong>Portfólio acadêmico</strong><p>Reuni nesta página os seis exercícios presentes no ZIP enviado: perfil com DOM, validação de idade, lista de tarefas, manipulador JSON, catálogo de produtos e atividade bônus de votação Hanna-Barbera. Use o menu para acessar cada atividade.</p>
+<nav><a href="#ex71">7.1 Perfil</a><a href="#ex72">7.2 Validador</a><a href="#ex73">7.3 Tarefas</a><a href="#ex74">7.4 JSON</a><a href="#ex75">7.5 Catálogo</a><a href="#bonus">Bônus: Urna</a></nav></div>
+
+<section id="ex71"><span class="tag">Exercício 7.1 · DOM</span><h2>Perfil do usuário</h2><p>Clique para preencher os dados do perfil usando JavaScript.</p><div class="preview"><h3 id="perfilNome">Nome do Usuário</h3><p id="perfilIdade">Idade: --</p><p id="perfilBio">Biografia aqui...</p><button onclick="atualizarPerfil()">Carregar perfil</button></div></section>
+
+<section id="ex72"><span class="tag">Exercício 7.2 · Condicionais</span><h2>Validador de entrada</h2><p>Informe sua idade para verificar se o acesso ao evento é permitido.</p><label for="idadeEntrada">Sua idade:</label><br><input type="number" id="idadeEntrada" min="0" placeholder="Digite sua idade"><button onclick="verificarAcesso()">Verificar acesso</button><p id="resultadoIdade" class="result" aria-live="polite">Aguardando idade...</p></section>
+
+<section id="ex73"><span class="tag">Exercício 7.3 · Arrays</span><h2>Lista de tarefas</h2><p>Lista inicial de tarefas. Você também pode adicionar novas tarefas.</p><div class="row"><input id="novaTarefa" placeholder="Digite uma tarefa"><button onclick="adicionarTarefa()">Adicionar tarefa</button></div><ul id="listaTarefas" class="task-list"></ul></section>
+
+<section id="ex74"><span class="tag">Exercício 7.4 · JSON</span><h2>Importador e exportador JSON</h2><p>Cole uma lista JSON de produtos, processe os dados ou gere um exemplo para exportação.</p><textarea id="jsonInput" placeholder='[{"nome":"Teclado","preco":150}]'></textarea><div class="row"><button onclick="processarJSON()">Processar JSON</button><button onclick="exportarJSON()">Gerar JSON de exemplo</button><button onclick="baixarJSON()">Baixar resultado .json</button></div><h3>Resultado</h3><div id="jsonOutput" class="json">Aguardando ação...</div></section>
+
+<section id="ex75"><span class="tag">Exercício 7.5 · Filtros</span><h2>Catálogo de produtos</h2><p>Pesquise por nome e filtre pela categoria.</p><div class="row"><input id="filtroTexto" placeholder="Buscar produto..." oninput="filtrarProdutos()"><select id="filtroCategoria" onchange="filtrarProdutos()"><option value="todas">Todas as categorias</option><option value="Eletrônicos">Eletrônicos</option><option value="Roupas">Roupas</option></select></div><div id="gradeProdutos" class="product-grid"></div></section>
+
+<section id="bonus"><span class="tag">Atividade bônus · Objetos e validação</span><h2>Urna Hanna-Barbera</h2><p>Escolha um personagem e um cargo. A página verifica a idade mínima para o cargo antes de registrar o voto de demonstração.</p><div class="row"><label for="personagem">Candidato</label><select id="personagem" onchange="atualizarCandidato()"><option value="">Escolha um personagem</option></select><label for="cargo">Cargo</label><select id="cargo" onchange="validarCandidato()"><option value="">Escolha o cargo</option><option>Presidente</option><option>Senador(a)</option><option>Deputado(a) Federal</option><option>Deputado(a) Estadual</option></select></div><div id="detalhesCandidato" class="preview" hidden><h3 id="nomeCandidato"></h3><p>Idade: <strong id="idadeCandidato"></strong></p></div><p id="statusCandidato" class="result">Selecione candidato e cargo.</p><button id="btnVotar" onclick="registrarVoto()" disabled>Registrar voto de demonstração</button><h3>Comprovante JSON</h3><div id="jsonVoto" class="json">Nenhum voto registrado.</div></section>
+</main><footer>Trabalho acadêmico · HTML, CSS, JavaScript e JSON · Daniel Dantas</footer>
+<script>
+function atualizarPerfil(){document.getElementById('perfilNome').textContent='Daniel Dantas';document.getElementById('perfilIdade').textContent='Idade: 20';document.getElementById('perfilBio').textContent='Estudante de programação e desenvolvimento web.'}
+function verificarAcesso(){const campo=document.getElementById('idadeEntrada'),out=document.getElementById('resultadoIdade');if(campo.value.trim()===''||Number(campo.value)<0){out.textContent='Digite uma idade válida.';out.className='result erro';return}const permitido=Number(campo.value)>=18;out.textContent=permitido?'Acesso Permitido!':'Acesso Negado: apenas para maiores de 18 anos.';out.className='result '+(permitido?'ok':'erro')}
+const tarefas=['Estudar JavaScript','Fazer os exercícios','Comprar café','Revisar o código'];
+function renderizarTarefas(){const ul=document.getElementById('listaTarefas');ul.replaceChildren();tarefas.forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.appendChild(li)})}
+function adicionarTarefa(){const campo=document.getElementById('novaTarefa'),t=campo.value.trim();if(!t)return;tarefas.push(t);campo.value='';renderizarTarefas()}
+let resultadoJSON=null;
+function processarJSON(){const out=document.getElementById('jsonOutput');try{const dados=JSON.parse(document.getElementById('jsonInput').value);if(!Array.isArray(dados)){out.textContent='O JSON informado não é uma lista.';resultadoJSON=null;return}out.textContent=dados.map((item,i)=>'Item '+(i+1)+': '+(item.nome??'Sem nome')).join('\n')||'Lista JSON vazia.';resultadoJSON=dados}catch(e){out.textContent='Erro: o formato inserido não é um JSON válido.';resultadoJSON=null}}
+function exportarJSON(){resultadoJSON={id:101,nome:'Monitor Gamer 144Hz',categoria:'Eletrônicos',emEstoque:true};document.getElementById('jsonOutput').textContent=JSON.stringify(resultadoJSON,null,2)}
+function baixarJSON(){if(resultadoJSON===null){processarJSON();if(resultadoJSON===null)return}const blob=new Blob([JSON.stringify(resultadoJSON,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='dados-produtos.json';a.click();URL.revokeObjectURL(url)}
+const produtos=[{id:1,nome:'Smartphone Galaxy',categoria:'Eletrônicos',preco:2500},{id:2,nome:'Camiseta Algodão',categoria:'Roupas',preco:80},{id:3,nome:'Notebook Pro',categoria:'Eletrônicos',preco:5200},{id:4,nome:'Jaqueta Jeans',categoria:'Roupas',preco:220},{id:5,nome:'Fone Sem Fio',categoria:'Eletrônicos',preco:350}];
+function renderizarProdutos(lista){const grade=document.getElementById('gradeProdutos');grade.replaceChildren();if(!lista.length){grade.textContent='Nenhum produto encontrado.';return}lista.forEach(p=>{const card=document.createElement('article');card.className='product';const h=document.createElement('h3');h.textContent=p.nome;const c=document.createElement('p');c.textContent='Categoria: '+p.categoria;const preco=document.createElement('p');preco.className='price';preco.textContent=p.preco.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});card.append(h,c,preco);grade.appendChild(card)})}
+function filtrarProdutos(){const texto=document.getElementById('filtroTexto').value.toLowerCase(),cat=document.getElementById('filtroCategoria').value;renderizarProdutos(produtos.filter(p=>p.nome.toLowerCase().includes(texto)&&(cat==='todas'||p.categoria===cat)))}
+const personagens=[{id:1,nome:'Fred Flintstone',idade:41},{id:2,nome:'Bob Pai',idade:55},{id:3,nome:'Rabugento',idade:19},{id:4,nome:'Penélope Charmosa',idade:25},{id:5,nome:'Zé Colméia',idade:36},{id:6,nome:'Dom Pixote',idade:32},{id:7,nome:'Manda-Chuva',idade:28},{id:8,nome:'Scooby-Doo',idade:16}];let candidato=null,podeVotar=false;
+function carregarPersonagens(){const s=document.getElementById('personagem');personagens.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.nome;s.appendChild(o)})}
+function atualizarCandidato(){candidato=personagens.find(p=>p.id===Number(document.getElementById('personagem').value))||null;const painel=document.getElementById('detalhesCandidato');painel.hidden=!candidato;if(candidato){document.getElementById('nomeCandidato').textContent=candidato.nome;document.getElementById('idadeCandidato').textContent=candidato.idade}validarCandidato()}
+function validarCandidato(){const cargo=document.getElementById('cargo').value,out=document.getElementById('statusCandidato');podeVotar=false;document.getElementById('btnVotar').disabled=true;if(!candidato||!cargo){out.textContent='Selecione candidato e cargo.';out.className='result';return}const min=['Presidente','Senador(a)'].includes(cargo)?35:21;podeVotar=candidato.idade>=min;out.textContent=podeVotar?'Elegível para o cargo de '+cargo+'.':'Inelegível: idade mínima para '+cargo+' é '+min+' anos.';out.className='result '+(podeVotar?'ok':'erro');document.getElementById('btnVotar').disabled=!podeVotar}
+function registrarVoto(){if(!podeVotar||!candidato)return;const voto={dataHora:new Date().toISOString(),candidato:candidato.nome,cargo:document.getElementById('cargo').value,protocolo:Math.floor(Math.random()*1000000000)};document.getElementById('jsonVoto').textContent=JSON.stringify(voto,null,2)}
+renderizarTarefas();renderizarProdutos(produtos);carregarPersonagens();
+</script>
+</body>
+</html>
